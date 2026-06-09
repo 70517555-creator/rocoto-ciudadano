@@ -33,6 +33,9 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# Firebase: llave secreta de acceso (NUNCA subir a internet)
+firebase-service-account.json
+
 # vercel
 .vercel
 

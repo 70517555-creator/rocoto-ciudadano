@@ -1,0 +1,24 @@
+# Configuración de Render para Rocoto Ciudadano (Next.js con servidor).
+# Render lee este archivo y crea el servicio web solo. Las llaves secretas
+# (Firebase y Groq) se ponen a mano en el panel de Render, NO aquí.
+services:
+  - type: web
+    name: rocoto-ciudadano
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      # Versión de Node que usará Render al construir y arrancar.
+      - key: NODE_VERSION
+        value: 22.13.1
+      # Llave de Firebase: pega aquí el CONTENIDO completo del archivo
+      # firebase-service-account.json (todo el JSON en una línea). sync:false = secreto.
+      - key: FIREBASE_SERVICE_ACCOUNT
+        sync: false
+      # Llave de Groq (solo se necesita para traducir/subir; para ver leyes no hace falta).
+      - key: GROQ_API_KEY
+        sync: false

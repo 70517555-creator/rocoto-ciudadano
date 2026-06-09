@@ -1,26 +1,24 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* === Identidad de Rocoto Ciudadano === */
+@theme {
+  /* Colores de marca */
+  --color-rocoto: #e0392b; /* rojo rocoto — protagonista */
+  --color-rocoto-dark: #b5241a; /* rojo intenso para hover/acentos fuertes */
+  --color-rocoto-soft: #fdeceb; /* fondo suave con tinte rojo */
+  --color-tallo: #2f9e44; /* verde tallo — acento */
+  --color-tallo-soft: #e8f6ec; /* fondo suave verde */
+  --color-fondo: #fffcf7; /* fondo limpio y cálido */
+  --color-tinta: #2b2622; /* texto: neutro oscuro cálido */
+  --color-tinta-suave: #6f665c; /* texto secundario */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Tipografías (redondeadas, amigables, muy legibles) */
+  --font-display: var(--font-baloo); /* títulos */
+  --font-sans: var(--font-nunito); /* texto general */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-fondo);
+  color: var(--color-tinta);
+  font-family: var(--font-nunito), system-ui, sans-serif;
 }
