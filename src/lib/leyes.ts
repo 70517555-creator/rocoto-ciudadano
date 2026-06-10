@@ -35,19 +35,31 @@ export type Ley = {
 };
 
 // Trae todas las leyes, de la más reciente a la más antigua.
+// Si Firestore falla (p. ej. cuota agotada), devolvemos lista vacía en vez de
+// romper la página: la web muestra su estado "sin leyes" en lugar de un error feo.
 export async function listarLeyes(): Promise<Ley[]> {
-  const snap = await db.collection("leyes").orderBy("creadoEn", "desc").get();
-  return snap.docs.map((doc) => ({
-    id: doc.id,
-    ...(doc.data() as Omit<Ley, "id">),
-  }));
+  try {
+    const snap = await db.collection("leyes").orderBy("creadoEn", "desc").get();
+    return snap.docs.map((doc) => ({
+      id: doc.id,
+      ...(doc.data() as Omit<Ley, "id">),
+    }));
+  } catch (error) {
+    console.error("No se pudo leer las leyes de Firestore:", error);
+    return [];
+  }
 }
 
 // Trae una sola ley por su identificador.
 export async function obtenerLey(id: string): Promise<Ley | null> {
-  const doc = await db.collection("leyes").doc(id).get();
-  if (!doc.exists) return null;
-  return { id: doc.id, ...(doc.data() as Omit<Ley, "id">) };
+  try {
+    const doc = await db.collection("leyes").doc(id).get();
+    if (!doc.exists) return null;
+    return { id: doc.id, ...(doc.data() as Omit<Ley, "id">) };
+  } catch (error) {
+    console.error("No se pudo leer la ley de Firestore:", error);
+    return null;
+  }
 }
 
 // Datos que se necesitan para crear una ley (antes de traducir).

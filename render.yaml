@@ -11,7 +11,9 @@ services:
     # Render asigna el puerto en $PORT (10000). Hay que escuchar ahí y en 0.0.0.0,
     # si no, Render no encuentra la app y marca "connection refused".
     startCommand: npx next start -H 0.0.0.0 -p $PORT
-    healthCheckPath: /
+    # Health check a una ruta ESTÁTICA (no lee Firestore), si no, Render bombardea
+    # la base cada pocos segundos y agota la cuota gratis ("RESOURCE_EXHAUSTED").
+    healthCheckPath: /manifest.webmanifest
     autoDeploy: true
     envVars:
       # Versión de Node que usará Render al construir y arrancar.

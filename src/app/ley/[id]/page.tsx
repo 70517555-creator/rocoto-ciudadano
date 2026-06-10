@@ -45,6 +45,9 @@ function aPuntos(t?: string): string[] {
     .filter((s) => s.length > 3);
 }
 
+// Render bajo demanda (no pre-armar en build, así no lee Firestore al publicar).
+export const dynamic = "force-dynamic";
+
 export default async function PaginaLey({
   params,
 }: {

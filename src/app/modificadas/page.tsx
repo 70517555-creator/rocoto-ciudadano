@@ -9,7 +9,7 @@ export const metadata = {
     "Las leyes que cambiaron otras leyes, explicadas en claro: qué dice, a quién afecta y cuánto sale de tu bolsillo.",
 };
 
-// Siempre leer lo último de Firestore (las leyes se actualizan a diario).
+// Render bajo demanda (no pre-armar en build, así no lee Firestore al publicar).
 export const dynamic = "force-dynamic";
 
 // Misma esencia que la portada: tarjetas cálidas con las 3 respuestas.

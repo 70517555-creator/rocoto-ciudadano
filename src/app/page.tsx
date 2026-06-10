@@ -27,7 +27,7 @@ function aLegible(t: string): string {
   return partes.join("").replace(/^(\s*)([a-záéíóúñ])/, (_, sp, c) => sp + c.toUpperCase());
 }
 
-// Siempre leer lo último de Firestore (las leyes se actualizan a diario).
+// Render bajo demanda (no pre-armar en build, así no lee Firestore al publicar).
 export const dynamic = "force-dynamic";
 
 export default async function Inicio() {
