@@ -8,7 +8,9 @@ services:
     plan: free
     region: oregon
     buildCommand: npm install && npm run build
-    startCommand: npm start
+    # Render asigna el puerto en $PORT (10000). Hay que escuchar ahí y en 0.0.0.0,
+    # si no, Render no encuentra la app y marca "connection refused".
+    startCommand: npx next start -H 0.0.0.0 -p $PORT
     healthCheckPath: /
     autoDeploy: true
     envVars:
